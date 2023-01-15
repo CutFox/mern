@@ -51,15 +51,17 @@ export default function RegisterForm() {
         register(FormEmail, FormPassword, FormUserName, FormType);
       })
       .catch((error) => {
-        error.forEach((el) => {});
-        enqueueSnackbar('Register Error', {
-          variant: 'error',
-          action: (key) => (
-            <MIconButton size="small" onClick={() => closeSnackbar(key)}>
-              <Icon icon={closeFill} />
-            </MIconButton>
-          )
+        error.response.data.forEach((el) => {
+          enqueueSnackbar(el.msg, {
+            variant: 'warning',
+            action: (key) => (
+              <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+                <Icon icon={closeFill} />
+              </MIconButton>
+            )
+          });
         });
+
         if (error.response) {
           // Request made and server responded
           console.log(error.response.data);
