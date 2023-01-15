@@ -53,6 +53,9 @@ app.post(
   UserController.register
 );
 app.get("/auth/me", checkAuth, UserController.getMe);
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
   res.json({
