@@ -52,9 +52,25 @@ app.post(
   handleValidationErrors,
   UserController.register
 );
+
+app.post("/test", (req, res) => {
+  res.json({
+    accessToken:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…U4OH0.yqRgZtiCK8hlMg293yKNyEzRL5WAfa1111111111",
+    user: {
+      id: "8e03bea3-35cc-4924-a8ac-87424c69e519",
+      displayName: "wqewqe wqewqe",
+      email: "2321dsad@asd.asd",
+      password: "1231121212121",
+      photoURL: null,
+    },
+  });
+});
+
 app.get("/auth/me", checkAuth, UserController.getMe);
+
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World! ");
 });
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {

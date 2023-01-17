@@ -12,6 +12,7 @@ export const register = async (req, res) => {
     const doc = new UserModel({
       email: req.body.email,
       userName: req.body.userName,
+      displayName: req.body.userName,
       type: req.body.type,
       status: "0",
       avatarUrl: req.body.avatarUrl,
@@ -33,14 +34,18 @@ export const register = async (req, res) => {
     const { passwordHash, ...userData } = user._doc;
 
     res.json({
-      ...userData,
-      token,
+      user: {
+        ...userData,
+      },
+      accessToken: token,
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({
-      message: "Не удалось зарегистрироваться",
-    });
+    res.status(501).json([
+      {
+        msg: "Не удалось зарегистрироваться",
+      },
+    ]);
   }
 };
 
@@ -78,8 +83,10 @@ export const login = async (req, res) => {
     const { passwordHash, ...userData } = user._doc;
 
     res.json({
-      ...userData,
-      token,
+      user: {
+        ...userData,
+      },
+      accessToken: token,
     });
   } catch (err) {
     console.log(err);

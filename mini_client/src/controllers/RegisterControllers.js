@@ -1,13 +1,8 @@
 // import axios from 'axios';
-// import useAuth from '../hooks/useAuth';
-
-// const errFor = (err) => {
-//   err.forEach((element) => {
-//     console.log(element.msg);
-//   });
-// };
+// import { MIconButton } from '../components/@material-extend';
 
 // export const registerController = (FormEmail, FormPassword, FormUserName, FormType) => {
+//   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 //   axios
 //     .post('http://localhost:4444/auth/register', {
 //       email: FormEmail,
@@ -16,14 +11,30 @@
 //       type: FormType
 //     })
 //     .then((res) => {
-//       console.log('hi1');
+//       enqueueSnackbar('Register success', {
+//         variant: 'success',
+//         action: (key) => (
+//           <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+//             <Icon icon={closeFill} />
+//           </MIconButton>
+//         )
+//       });
+//       register(FormEmail, FormPassword, FormUserName, FormType);
 //     })
 //     .catch((error) => {
 //       if (error.response) {
+//         error.response.data.forEach((el) => {
+//           enqueueSnackbar(el.msg, {
+//             variant: 'warning',
+//             action: (key) => (
+//               <MIconButton size="small" onClick={() => closeSnackbar(key)}>
+//                 <Icon icon={closeFill} />
+//               </MIconButton>
+//             )
+//           });
+//         });
 //         // Request made and server responded
 //         console.log(error.response.data);
-//         console.log(error.response.status);
-//         console.log(error.response.headers);
 //       } else if (error.request) {
 //         // The request was made but no response was received
 //         console.log(error.request);

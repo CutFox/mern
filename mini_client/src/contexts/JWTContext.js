@@ -1,7 +1,8 @@
 import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 // utils
-import axios from '../utils/axios';
+// import axios from '../utils/axios';
+import axios from 'axios';
 import { isValidToken, setSession } from '../utils/jwt';
 
 // ----------------------------------------------------------------------
@@ -107,7 +108,7 @@ function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post('/api/account/login', {
+    const response = await axios.post('http://localhost:4444/auth/login', {
       email,
       password
     });
@@ -122,15 +123,14 @@ function AuthProvider({ children }) {
     });
   };
 
-  const register = async (email, password, firstName, lastName) => {
-    const response = await axios.post('/api/account/register', {
+  const register = async (email, password, userName, type) => {
+    const response = await axios.post('http://localhost:4444/auth/register', {
       email,
       password,
-      firstName,
-      lastName
+      userName,
+      type
     });
     const { accessToken, user } = response.data;
-
     window.localStorage.setItem('accessToken', accessToken);
     dispatch({
       type: 'REGISTER',
